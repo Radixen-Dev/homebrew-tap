@@ -13,6 +13,12 @@ cask "magic-accessories-connector" do
   depends_on formula: "blueutil"
   depends_on macos: ">= :monterey"
 
+  # The app is not notarized. Without this flag Homebrew stamps the quarantine
+  # xattr on install, which triggers the "can't be verified / Move to Trash"
+  # Gatekeeper dialog on macOS 13+. Skipping quarantine is safe here because
+  # the user explicitly ran `brew install` — intent is already established.
+  disable_quarantine true
+
   app "MagicAccessoriesConnector.app"
 
   # Quit the running app before uninstalling so files are not locked.
@@ -28,9 +34,6 @@ cask "magic-accessories-connector" do
   caveats <<~EOS
     Magic Accessories Connector is a menu bar app. After installation, launch it:
       open /Applications/MagicAccessoriesConnector.app
-
-    If macOS blocks the app on first launch (Gatekeeper), right-click the app
-    in Finder and choose Open, then click Open again in the dialog.
 
     To start automatically at login, click "Start at Login" in the MAC menu bar icon.
 
