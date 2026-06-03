@@ -13,13 +13,16 @@ cask "magic-accessories-connector" do
   depends_on formula: "blueutil"
   depends_on macos: ">= :monterey"
 
-  # The app is not notarized. Without this flag Homebrew stamps the quarantine
-  # xattr on install, which triggers the "can't be verified / Move to Trash"
-  # Gatekeeper dialog on macOS 13+. Skipping quarantine is safe here because
-  # the user explicitly ran `brew install` — intent is already established.
-  disable_quarantine true
-
   app "MagicAccessoriesConnector.app"
+
+  # The app is not notarized. Homebrew stamps com.apple.quarantine on install,
+  # which triggers the "can't be verified / Move to Trash" Gatekeeper dialog on
+  # macOS 13+. Removing the xattr postflight is safe — the user already ran
+  # `brew install` so intent is established.
+  postflight do
+    system_command "/usr/bin/xattr",
+                   args: ["-dr", "com.apple.quarantine", "#{appdir}/MagicAccessoriesConnector.app"]
+  end
 
   # Quit the running app before uninstalling so files are not locked.
   uninstall quit: "dev.radixen.magic-accessories-connector"
