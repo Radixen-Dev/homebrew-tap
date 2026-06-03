@@ -3,7 +3,7 @@
 
 cask "magic-accessories-connector" do
   version "1.2.0"
-  sha256 "492cca670f6a215f915f7eb37fc56c69fb70b67e1963c91c586d7dd962f98ca0"
+  sha256 "5ab36f7cd5fc3c2fcc29d62e3360962fa6ff6bed655512c242c2f0294f49003c"
 
   url "https://github.com/Radixen-Dev/MagicAccessoriesConnector/releases/download/v#{version}/MagicAccessoriesConnector-#{version}.zip"
   name "Magic Accessories Connector"
