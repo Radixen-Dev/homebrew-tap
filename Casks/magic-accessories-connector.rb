@@ -15,6 +15,15 @@ cask "magic-accessories-connector" do
 
   app "MagicAccessoriesConnector.app"
 
+  # The app is not notarized. Homebrew stamps com.apple.quarantine on install,
+  # which triggers the "can't be verified / Move to Trash" Gatekeeper dialog on
+  # macOS 13+. Removing the xattr postflight is safe — the user already ran
+  # `brew install` so intent is established.
+  postflight do
+    system_command "/usr/bin/xattr",
+                   args: ["-dr", "com.apple.quarantine", "#{appdir}/MagicAccessoriesConnector.app"]
+  end
+
   # Quit the running app before uninstalling so files are not locked.
   uninstall quit: "dev.radixen.magic-accessories-connector"
 
@@ -28,9 +37,6 @@ cask "magic-accessories-connector" do
   caveats <<~EOS
     Magic Accessories Connector is a menu bar app. After installation, launch it:
       open /Applications/MagicAccessoriesConnector.app
-
-    If macOS blocks the app on first launch (Gatekeeper), right-click the app
-    in Finder and choose Open, then click Open again in the dialog.
 
     To start automatically at login, click "Start at Login" in the MAC menu bar icon.
 
