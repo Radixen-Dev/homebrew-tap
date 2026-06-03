@@ -62,10 +62,11 @@ class MagicAccessoriesConnector < Formula
       Preferences are stored at:
         ~/Library/Application Support/MagicAccessoriesConnector/prefs.json
 
-      To fully uninstall, including saved preferences:
+      To fully uninstall and leave zero trace:
         brew services stop magic-accessories-connector
         brew uninstall magic-accessories-connector
         rm -rf ~/Library/Application\\ Support/MagicAccessoriesConnector
+        rm -f $(brew --prefix)/var/log/magic-accessories-connector.log
     EOS
   end
 
