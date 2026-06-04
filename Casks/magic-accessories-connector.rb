@@ -2,8 +2,8 @@
 # frozen_string_literal: true
 
 cask "magic-accessories-connector" do
-  version "1.1.0"
-  sha256 "5bec4aa90a3d9e44e2c59f7c40f4d2658ebe9e089c1bd0d7b9b36f06ce586154"
+  version "1.2.1"
+  sha256 "0f41b1ecc2a07c25a958c3df817c89b661ef37563aafd46bb1a6be8029f6e03e"
 
   url "https://github.com/Radixen-Dev/MagicAccessoriesConnector/releases/download/v#{version}/MagicAccessoriesConnector-#{version}.zip"
   name "Magic Accessories Connector"
